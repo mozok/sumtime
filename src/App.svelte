@@ -1,35 +1,32 @@
 <script>
 	import TimeElement from './TimeElement.svelte';
+	import TimeTotal from './TimeTotal.svelte';
+	import { timeSlots } from './stores.js';
 
-	let timeSlots = [
-		{minutes: 0, hours: 0}
-	];
-
-	/*
-	* Delete last time slot element handler
+	/** 
+	 * Process TimeElement input changes
 	*/
-	function handleDelete() {
-		timeSlots.pop();
-		timeSlots = timeSlots;
-	}
+	function handleTimeChanged(event) {
+		let tempTimeSlots = [...$timeSlots];
+		let index = tempTimeSlots.findIndex(e => e.id === event.detail.id);
+		tempTimeSlots[index].minutes = event.detail.minutes;
+		tempTimeSlots[index].hours = event.detail.hours;
 
-	/*
-	* Add one more time slot handler
-	*/
-	function handleAdd() {
-		timeSlots.push({minutes: 0, hours: 0});
-		timeSlots = timeSlots;
+		timeSlots.updateSlots(tempTimeSlots);
 	}
 </script>
 
 <main>
-	{#each timeSlots as timeSlot}
-		<TimeElement {...timeSlot}/>
+	<TimeTotal />
+
+	{#each $timeSlots as timeSlot}	
+		<TimeElement {...timeSlot} on:time_changed={handleTimeChanged}/>
 	{/each}
 
 	<div>
-		<button on:click={handleDelete}>-</button>
-		<button on:click={handleAdd}>+</button>
+		<button on:click={timeSlots.deleteSlot}>-</button>
+		<button on:click={timeSlots.addSlot}>+</button>
+		<button on:click={timeSlots.resetSlots}>Reset</button>
 	</div>
 </main>
 
