@@ -1,10 +1,36 @@
 <script>
-	export let name;
+	import TimeElement from './TimeElement.svelte';
+
+	let timeSlots = [
+		{minutes: 0, hours: 0}
+	];
+
+	/*
+	* Delete last time slot element handler
+	*/
+	function handleDelete() {
+		timeSlots.pop();
+		timeSlots = timeSlots;
+	}
+
+	/*
+	* Add one more time slot handler
+	*/
+	function handleAdd() {
+		timeSlots.push({minutes: 0, hours: 0});
+		timeSlots = timeSlots;
+	}
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	{#each timeSlots as timeSlot}
+		<TimeElement {...timeSlot}/>
+	{/each}
+
+	<div>
+		<button on:click={handleDelete}>-</button>
+		<button on:click={handleAdd}>+</button>
+	</div>
 </main>
 
 <style>
