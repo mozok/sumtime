@@ -1,5 +1,7 @@
 <script>
     import { timeSlots } from './stores.js';
+    import { fade } from 'svelte/transition';
+
     let days = 0,
         hours = 0,
         minutes = 0;
@@ -36,16 +38,18 @@
 </script>
 
 <div class="container">
+    {#if days}
+        <div transition:fade class="column">
+            <div class="title">Days</div>
+            <div class="digit">{days}</div>
+        </div>
+    {/if}
     <div class="column">
-        <span class="title">Days</span>
-        <div class="digit">{days}</div>
-    </div>
-    <div class="column">
-        <span class="title">Hours</span>
+        <div class="title">Hours</div>
         <div class="digit">{hours}</div>
     </div>
     <div class="column">
-        <span class="title">Minutes</span>
+        <div class="title">Minutes</div>
         <div class="digit">{minutes}</div>
     </div>
 </div>
@@ -64,6 +68,7 @@
         background-color: #fff;
         border-radius: 1vw;
         font-family: Oswald, sans-serif;
+        color: #333
     }
 
     .container .column .title {
@@ -72,5 +77,7 @@
 
     .container .column .digit {
         font-size: 10vw;
+        position: relative;
+        bottom: 20%;
     }
 </style>
