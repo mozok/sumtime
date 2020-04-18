@@ -2,9 +2,9 @@
 	font-family: Oswald; src: url('Oswald-Regular.ttf');
 } 
 
-html, body {
-	position: relative;
-	width: 100%;
+html{
+	/* position: relative; */
+	/* width: 100%; */
 	height: 100%;
 }
 

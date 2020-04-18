@@ -16,7 +16,7 @@
 	}
 </script>
 
-<div>
+<div class="container">
     <input id="hours_{id}" 
         type="number" min=0 max=59
         bind:value={hours}
@@ -30,3 +30,21 @@
         on:change={changeTime}
     />    
 </div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .container input {
+        margin: 10px;
+        width: 14vw;
+        display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+    }
+
+ 
+</style>
